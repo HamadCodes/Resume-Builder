@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav>
+        <div class="navbarcontainer">
+            <h1>HamadCodes</h1>
+            <h1>Resume Builder</h1>
+            <a href="https://www.linkedin.com/in/hamadcodes/" class="fa fa-linkedin"></a>
+        </div>
+    </nav>
+    <div class="container">
+    <div class="formcontainer">
+
+
+        <form class="resumeForm" id="resumeForm">
+            <label for="picture">Profile Picture:</label>
+            <input type="file" id="picture" accept="image/*" required>
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="text" id="profession" placeholder="Profession" required>
+            <textarea minlength="245" maxlength="270" id="about" placeholder="About Me (4 lines)" required></textarea >
+            <input type="text" id="phone" placeholder="Phone" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="address" placeholder="Address" required>
+            
+            <h3>Education</h3>
+            <input type="text" id="degree1" placeholder="Degree 1" required>
+            <input type="text" id="university1" placeholder="University/College Name" required>
+            <input type="text" id="degree2" placeholder="Degree 2" required>
+            <input type="text" id="university2" placeholder="University/College Name" required>
+
+            <h3>Skills</h3>
+            <input type="text" id="skill1" placeholder="Skill 1" required>
+            <input type="text" id="skill2" placeholder="Skill 2" required>
+            <input type="text" id="skill3" placeholder="Skill 3" required>
+            <input type="text" id="skill4" placeholder="Skill 4" required>
+            <input type="text" id="skill5" placeholder="Skill 5" required>
+
+            <h3>Languages</h3>
+            <input type="text" id="language1" placeholder="Language 1" required>
+            <input type="text" id="language2" placeholder="Language 2" required>
+
+            <h3>Experience</h3>
+            <input type="text" id="company1" placeholder="Company Name 1" required>
+            <input type="text" id="years1" placeholder="Years" required>
+            <textarea minlength="410" maxlength="445" id="job1" placeholder="Job Description" required></textarea>
+
+            <input type="text" id="company2" placeholder="Company Name 2" required>
+            <input type="text" id="years2" placeholder="Years" required>
+            <textarea minlength="410" maxlength="445" id="job2" placeholder="Job Description" required></textarea>
+
+            <h3>Certifications</h3>
+            <input type="text" id="certification1" placeholder="Certification 1" required>
+            <input type="text" id="certYear1" placeholder="Year" required>
+            <input type="text" id="certification2" placeholder="Certification 2" required>
+            <input type="text" id="certYear2" placeholder="Year" required>
+            <input type="text" id="certification3" placeholder="Certification 3" required>
+            <input type="text" id="certYear3" placeholder="Year" required>
+
+            <h3>References</h3>
+            <input type="text" id="ref1" placeholder="Reference Name 1" required>
+            <input type="text" id="refPhone1" placeholder="Phone" required>
+            <input type="email" id="refEmail1" placeholder="Email" required>
+
+            <input type="text" id="ref2" placeholder="Reference Name 2" required>
+            <input type="text" id="refPhone2" placeholder="Phone" required>
+            <input type="email" id="refEmail2" placeholder="Email" required>
+
+            <input type="text" id="ref3" placeholder="Reference Name 3" required>
+            <input type="text" id="refPhone3" placeholder="Phone" required>
+            <input type="email" id="refEmail3" placeholder="Email" required>
+
+            <div class="submitbuttons">
+            <button type="submit">Generate Resume</button>
+            <button id="downloadPdf">Download as PDF</button>
+            </div>
+        </form>
+
+       
+    </div>
+
+    <div id="previewresume" class="previewresume">
+        <div id="page" class="page">
+
+            <div class="leftbar">
+    
+                
+                <div class="pic_section">
+                    <img id="profilePicture" src="no-profile-picture-icon.png" class="pic" alt="Profile Picture">
+                </div>
+                
+    
+                <div class="contact_section">
+                    <h5>Contact</h5>
+                    <h6>Phone</h6>
+                    <p id="resumephone" contenteditable="true" >12345678910</p>
+                    <h6>Email</h6>
+                    <p id="resumeemail" contenteditable="true">example@example.com</p>
+                    <h6>Address</h6>
+                    <p id="resumeaddress" contenteditable="true">ABC Street, XYZ Area, ABC Country</p>
+                </div>
+    
+                <div class="education_section">
+                    <h5>Education</h5>
+                    <h6 id="resumedegree1" contenteditable="true">Degree</h6>
+                    <p id="resumeuniversity1" contenteditable="true">ABC University</p>
+                    <h6 id="resumedegree2" contenteditable="true">Degree</h6>
+                    <p id="resumeuniversity2" contenteditable="true">XYZ University</p>
+                </div>
+    
+                <div class="skills_section">
+                    <h5>Skills</h5>
+                    <ul>
+                        <li id="resumeskill1" contenteditable="true">Skill1</li>
+                        <li id="resumeskill2" contenteditable="true">Skill2</li>
+                        <li id="resumeskill3" contenteditable="true">Skill3</li>
+                        <li id="resumeskill4" contenteditable="true">Skill4</li>
+                        <li id="resumeskill5" contenteditable="true">Skill5</li>
+                    </ul>
+                </div>
+    
+                <div class="languages_section">
+                    <h5>Languages</h5>
+                    <ul>
+                        <li id="resumelanguage1" contenteditable="true">Language1</li>
+                        <li id="resumelanguage2" contenteditable="true">Language2</li>
+                    </ul>
+                </div>
+    
+            </div>
+    
+            <div class="right_section">
+    
+                <div class="aboutme_section">
+                    <p class="name" contenteditable="true" id="resumename">Your Name</p>
+                    <p class="position" id="resumeprofession" contenteditable="true">Profession</p>
+                    <p id="resumeabout" contenteditable="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita odio sunt et debitis reprehenderit! Alias, vero nam! Voluptates officiis deleniti corrupti architecto consectetur, illo itaque harum! Enim obcaecati voluptates deserunt minima a!</p>
+                </div>
+    
+                <div class="experience_section">
+                    <h5 class="heading">Experience</h5>
+                    <h6 class="companynames" id="resumecompany1" contenteditable="true">Company1</h6>
+                    <h6 class="years" id="resumeyears1" contenteditable="true">Years1</h6>
+                    <p id="resumejob1" contenteditable="true">Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni culpa illo, adipisci exercitationem nostrum similique quod, voluptate consequatur asperiores modi blanditiis cupiditate! Dignissimos voluptate necessitatibus et temporibus sapiente nisi ut veniam nihil. Quisquam dolorem praesentium ad quam aspernatur eaque laboriosam labore debitis, optio, adipisci dicta amet voluptatem pariatur neque eveniet</p>
+                    
+                    <h6 class="companynames" id="resumecompany2" contenteditable="true">Company2</h6>
+                    <h6 class="years" id="resumeyears2" contenteditable="true">Years2</h6>
+                    <p id="resumejob2" contenteditable="true">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus soluta eligendi suscipit temporibus expedita, ipsam vitae atque, commodi neque quisquam quaerat minus recusandae illum id aperiam, reprehenderit quis doloremque reiciendis in illo porro autem. Facere eos, incidunt repudiandae nulla, fugiat deserunt porro corrupti fugit nostrum assumenda sit, unde natus ipsum</p>
+    
+    
+                </div>
+    
+                <h5 class="heading">Certifications</h5>
+    
+                <div class="certification_section">
+    
+                  <div>
+                    <h6 id="resumecertification1" contenteditable="true">Certification1</h6>
+                    <h6 id="resumecertification2" contenteditable="true">Certification2</h6>
+                    <h6 id="resumecertification3" contenteditable="true">Certification3</h6>
+                </div>
+    
+                <div>
+                    <h6 id="resumecertyear1" contenteditable="true">Year</h6>
+                    <h6 id="resumecertyear2" contenteditable="true">Year</h6>
+                    <h6 id="resumecertyear3" contenteditable="true">Year</h6>
+                </div>
+    
+                </div>
+                <h5 class="references_heading">References</h5>
+
+                <div class="references_section">
+                <div>
+                    <h6 id="resumeref1" contenteditable="true">Reference1</h6>
+                    <h6 id="resumeref2" contenteditable="true">Reference2</h6>
+                </div>
+    
+                <div>
+                    <p class="linehightreduce" id="resumerefphone1" contenteditable="true">RefPhone</p>
+                    <p class="linehightreduce" id="resumerefphone2" contenteditable="true">RefPhone</p>
+                </div>
+    
+                <div>
+                    <p class="linehightreduce" id="resumerefemail1" contenteditable="true">RefEmail</p>
+                    <p class="linehightreduce" id="resumerefemail2" contenteditable="true">RefEmail</p>
+                </div>
+    
+                
+    
+            </div>
+    
+        </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
